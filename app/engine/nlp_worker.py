@@ -6,7 +6,7 @@ class SpacyProcessor(INLPProcessor):
         try:
             self.nlp = spacy.load(model_name)
         except OSError:
-            # Fallback to a CPU optimized model
+            # fallback to a CPU optimized model
             self.nlp = spacy.load("en_core_web_sm")
 
     def process_message(self, message: str) -> dict:
@@ -16,7 +16,7 @@ class SpacyProcessor(INLPProcessor):
         # Extract entities
         entity_map = {ent.text: ent.label_ for ent in doc.ents}
         
-        # Filter Tokens to reduce LLM costs
+        # filter Tokens to reduce LLM costs
         # though of removing stopwords and punctuation but that might 
         # hamper language understanding so just removed white space here
         filtered_tokens = [
