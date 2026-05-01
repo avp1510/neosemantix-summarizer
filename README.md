@@ -3,7 +3,7 @@ Neosemantix — Quick Start
 
 Overview
 --------
-Small pipeline that reads a sample input, performs NLP (spaCy), and asks the Groq LLM for a summary.
+Small pipeline that reads a sample input, performs Entity extraction using spaCy, and generates a summary via the configured LLM summarization service.
 
 Repository
 ----------
