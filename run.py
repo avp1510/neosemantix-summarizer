@@ -4,6 +4,7 @@ from app.contract.schema import InputMessage, OutputMessage
 from app.engine.nlp_worker import SpacyProcessor
 from app.engine.llm_client import SummarizationService
 from dotenv import load_dotenv
+from datetime import datetime
 load_dotenv()
 
 def main():
@@ -19,13 +20,14 @@ def main():
             # Fetch inputs here from Kafka
 
             input_obj = InputMessage(
-                request_id = raw_json_data["request_id"],
-                text = raw_json_data["text"],
-                timestamp = raw_json_data["timestamp"],
+                request_id=raw_json_data["request_id"],
+                user_id=raw_json_data.get("user_id"),
+                message=raw_json_data["message"],
+                request_time=raw_json_data["request_time"],
             )
             # Added input to input object to mimic a kafka topic message
 
-            results = nlp_engine.process_text(input_obj.text)
+            results = nlp_engine.process_message(input_obj.message)
             # This result has preprocessed text and entities
             
 
@@ -44,12 +46,15 @@ def main():
             #Create Output Object (Standardizing the result)
             output_obj = OutputMessage(
                 request_id=input_obj.request_id,
+                user_id=input_obj.user_id,
                 summary=summary,
-                entities=results['entities']
+                entities=results['entities'],
+                request_time=input_obj.request_time,
+                response_time=datetime.now()
             )
             
             print(f"\n--- Output Contract Validated ---")
-            print(f"Generated At: {output_obj.generated_at}")
+            print(f"Response Time: {output_obj.response_time}")
             
         except Exception as e:
             print(f"Contract Violation: {e}")
