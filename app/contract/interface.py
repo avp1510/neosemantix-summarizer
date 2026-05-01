@@ -2,8 +2,6 @@ from abc import ABC, abstractmethod
 
 class INLPProcessor(ABC):
     @abstractmethod
-    def process_text(self, text: str) -> dict:
-        """
-        Takes a string and returns a dict depending on what you want to return since this is an abstract class
-        """
+    def process_message(self, message: str) -> dict:
+        # Takes a message string and returns a dict of processing results (entities, compressed payload, etc.)
         pass

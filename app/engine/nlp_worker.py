@@ -9,8 +9,8 @@ class SpacyProcessor(INLPProcessor):
             # Fallback to a CPU optimized model
             self.nlp = spacy.load("en_core_web_sm")
 
-    def process_text(self, text: str) -> dict:
-        doc = self.nlp(text)
+    def process_message(self, message: str) -> dict:
+        doc = self.nlp(message)
         
         
         # Extract entities
@@ -30,5 +30,5 @@ class SpacyProcessor(INLPProcessor):
     
         return {
             "entities": entity_map,
-        "compressed_payload": compressed_text
-    }
+            "compressed_payload": compressed_text
+        }
