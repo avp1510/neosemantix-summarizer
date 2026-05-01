@@ -5,6 +5,12 @@ Overview
 --------
 Small pipeline that reads a sample input, performs NLP (spaCy), and asks the Groq LLM for a summary.
 
+Repository
+----------
+Source code and diagrams are available at: https://github.com/avp1510/neosemantix-summarizer
+
+System design (interactive): https://whimsical.com/system-design2525/system-design-9x3CG2LipJyeiUvSh8YNYp
+
 Project layout (key files)
 - `run.py` — entrypoint that wires components and prints results.
 - `app/engine/api.py` — loads `GROQ_API_KEY` from environment.
